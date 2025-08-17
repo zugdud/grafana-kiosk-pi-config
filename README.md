@@ -1,6 +1,21 @@
 # Grafana Kiosk Pi Setup
 
+## Summary
+
 Zugstats is my home grafana kiosk running on a raspiberry pi, it collects and serves  prometheus data from these sources:
+
+
+## Core Software Components
+
+| #  | Service/Software           | Description                                                      | Role/Function                                 | URL                                                                                                 |
+|----|---------------------------|------------------------------------------------------------------|-----------------------------------------------|-----------------------------------------------------------------------------------------------------|
+| 1  | Grafana                   | Open-source analytics & monitoring platform                      | Visualizes metrics and dashboards             | [https://grafana.com/](https://grafana.com/)                                                        |
+| 2  | Prometheus                | Time-series database and monitoring system                       | Collects and stores metrics from exporters    | [https://prometheus.io/](https://prometheus.io/)                                                    |
+| 3  | grafana-kiosk             | Kiosk-mode browser for Grafana dashboards                        | Displays dashboards in full-screen mode       | [https://github.com/grafana/grafana-kiosk](https://github.com/grafana/grafana-kiosk)                |
+| 4  | unclutter                 | X11 tool to hide the mouse cursor when idle                      | Keeps the display clean for kiosk usage       | [https://github.com/Airblader/unclutter](https://github.com/Airblader/unclutter)                    |
+| 5  | LibreHardwareMonitor      | Hardware monitoring library and exporter                         | Exports system hardware metrics to Prometheus | [https://github.com/LibreHardwareMonitor/LibreHardwareMonitor](https://github.com/LibreHardwareMonitor/LibreHardwareMonitor) |
+
+## Data Collection Services and Prometheus Exporters
 
 | #  | Data Source                                      | Exporter/Collector                              | Repository/Link                                                                 |
 |----|--------------------------------------------------|-------------------------------------------------|---------------------------------------------------------------------------------|
@@ -8,6 +23,8 @@ Zugstats is my home grafana kiosk running on a raspiberry pi, it collects and se
 | 2  | Ubiquiti network gear stats                      | unpoller                                        | [github.com/unpoller/unpoller](https://github.com/unpoller/unpoller)            |
 | 3  | Pi-hole DNS stats                                | pihole-exporter                                 | [github.com/eko/pihole-exporter](https://github.com/eko/pihole-exporter)        |
 | 4  | Gaming PC sensors and system stats               | librehardwaremonitor-prometheus-exporter         | [github.com/zugdud/librehardwaremonitor-prometheus-exporter](https://github.com/zugdud/librehardwaremonitor-prometheus-exporter) |
+
+
 
 ## Services Overview
 
