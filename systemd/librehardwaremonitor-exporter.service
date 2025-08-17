@@ -1,0 +1,15 @@
+[Unit]
+Description=LibreHardwareMonitor Prometheus Exporter
+After=network.target
+
+[Service]
+Type=simple
+User=librehardwaremonitor
+Group=librehardwaremonitor
+WorkingDirectory=/opt/librehardwaremonitor-exporter
+ExecStart=/opt/librehardwaremonitor-exporter/librehardwaremonitor-exporter
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,11 @@
+[Unit]
+Description=Unclutter - Hide mouse cursor
+After=display-manager.service
+
+[Service]
+ExecStart=/usr/bin/unclutter -idle 0.5 -root -display :0
+Restart=always
+User=pi
+
+[Install]
+WantedBy=multi-user.target

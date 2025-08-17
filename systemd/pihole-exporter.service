@@ -1,0 +1,36 @@
+[Unit]
+Description=Pi-hole Exporter
+Documentation=https://github.com/eko/pihole-exporter
+After=network.target
+Wants=network.target
+
+[Service]
+Type=simple
+User=pihole-exporter
+Group=pihole-exporter
+ExecStart=/usr/local/bin/pihole_exporter-linux-arm -pihole_hostname <PIHOLE_IP> -pihole_password ${API_TOKEN} -skip_tls_verification true
+Restart=always
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=pihole-exporter
+
+# Security settings
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectSystem=strict
+ProtectHome=yes
+ReadWritePaths=/var/lib/pihole-exporter
+ProtectKernelTunables=yes
+ProtectKernelModules=yes
+ProtectControlGroups=yes
+
+# Environment
+Environment=API_TOKEN=<YOUR_PIHOLE_API_TOKEN>
+EnvironmentFile=-/etc/default/pihole-exporter
+
+# Resource limits
+LimitNOFILE=65536
+
+[Install]
+WantedBy=multi-user.target

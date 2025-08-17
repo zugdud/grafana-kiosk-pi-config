@@ -1,0 +1,19 @@
+[Unit]
+Description=Grafana Kiosk
+Documentation=https://github.com/grafana/grafana-kiosk
+Documentation=https://grafana.com/blog/2019/05/02/grafana-tutorial-how-to-create-kiosks-to-display-dashboards-on-a-tv
+After=network.target
+
+[Service]
+User=pi
+Environment="DISPLAY=:0"
+Environment="XAUTHORITY=/home/pi/.Xauthority"
+
+# Disable screensaver and monitor standby
+ExecStartPre=xset s off
+ExecStartPre=xset -dpms
+ExecStartPre=xset s noblank
+
+ExecStart=/usr/bin/grafana-kiosk -URL=http://localhost:3000/d/9162e1e2-4b21-489c-868b-37c96f44db30/zugstats?kiosk=&orgId=1&from=now-30m&to=now&timezone=browser&refresh=30s -login-method=local -username=placeholder -password=placeholder
+[Install]
+WantedBy=graphical.target
