@@ -1,5 +1,12 @@
 # Grafana Kiosk Pi Setup
 
+Zugstats is my home grafana kiosk running on a raspiberry pi, it collects and serves  prometheus data from these sources:
+
+1.) Flume Water Monitor stats, collected with flume-water-prometheus-exporter https://github.com/zugdud/flume-water-prometheus-exporter
+2.) Ubiqiti network gear stats, collected with unpoller: https://github.com/unpoller/unpoller
+3.) pihole stats, collected with pihole-exporter: https://github.com/eko/pihole-exporter
+4.) Gaming PC sensors and system stats, collected with librehardwaremonitor-prometheus-exporter  https://github.com/zugdud/librehardwaremonitor-prometheus-exporter 
+
 ## Services Overview
 
 #### 1. **Grafana Server** (`grafana-server.service`)
@@ -25,13 +32,20 @@
 - **Config**: Uses environment file `/etc/flume-exporter/config.env`
 - **Features**: Secure configuration with environment variables for API credentials
 
-#### 4. **LibreHardwareMonitor Exporter** (`librehardwaremonitor-exporter.service`)
+#### 4. **UnPoller** (`unpoller.service`)
+- **Purpose**: Collects telemetry and observability data from UniFi network equipment
+- **Description**: Monitors UniFi devices (gateways, switches, access points) for network performance metrics
+- **User**: Runs as `unpoller` user
+- **Config**: Uses `/etc/unpoller/up.conf` configuration file
+- **Features**: Collects bandwidth, latency, and device status metrics from UniFi network infrastructure
+
+#### 5. **LibreHardwareMonitor Exporter** (`librehardwaremonitor-exporter.service`)
 - **Purpose**: Exports hardware monitoring metrics
 - **Description**: Collects system performance data (CPU, GPU, memory, etc.)
 - **User**: Runs as `librehardwaremonitor` user
 - **Working Directory**: `/opt/librehardwaremonitor-exporter`
 
-#### 5. **Pi-hole Exporter** (`pihole-exporter.service`)
+#### 6. **Pi-hole Exporter** (`pihole-exporter.service`)
 - **Purpose**: Exports Pi-hole DNS statistics
 - **Description**: Collects DNS query data, blocked domains, and Pi-hole performance metrics
 - **User**: Runs as `pihole-exporter` user
@@ -40,7 +54,7 @@
 
 ### Display and UI
 
-#### 6. **Grafana Kiosk** (`grafana-kiosk.service`)
+#### 7. **Grafana Kiosk** (`grafana-kiosk.service`)
 - **Purpose**: Full-screen dashboard display for TV/monitor
 - **Description**: Automatically displays a specific Grafana dashboard in kiosk mode
 - **User**: Runs as `pi` user
@@ -51,7 +65,7 @@
   - Shows dashboard: `zugstats` (ID: 9162e1e2-4b21-489c-868b-37c96f44db30)
   - Time range: Last 30 minutes
 
-#### 7. **Unclutter** (`unclutter.service`)
+#### 8. **Unclutter** (`unclutter.service`)
 - **Purpose**: Hides mouse cursor for clean kiosk display
 - **Description**: Automatically hides cursor after 0.5 seconds of inactivity
 - **User**: Runs as `pi` user
@@ -76,6 +90,7 @@
 
 ### Configuration Files
 - **Prometheus**: `/home/pi/prometheus/prometheus.yml`
+- **UnPoller**: `/etc/unpoller/up.conf` - UniFi network monitoring configuration
 - **Flume Exporter**: `/etc/flume-exporter/config.env`
 - **Pi-hole Exporter**: `/etc/default/pihole-exporter`
 - **Grafana Dashboard**: `zugstats.json` - Import this dashboard into Grafana
