@@ -2,10 +2,12 @@
 
 Zugstats is my home grafana kiosk running on a raspiberry pi, it collects and serves  prometheus data from these sources:
 
-1.) Flume Water Monitor stats, collected with flume-water-prometheus-exporter https://github.com/zugdud/flume-water-prometheus-exporter
-2.) Ubiqiti network gear stats, collected with unpoller: https://github.com/unpoller/unpoller
-3.) pihole stats, collected with pihole-exporter: https://github.com/eko/pihole-exporter
-4.) Gaming PC sensors and system stats, collected with librehardwaremonitor-prometheus-exporter  https://github.com/zugdud/librehardwaremonitor-prometheus-exporter 
+| #  | Data Source                                      | Exporter/Collector                              | Repository/Link                                                                 |
+|----|--------------------------------------------------|-------------------------------------------------|---------------------------------------------------------------------------------|
+| 1  | Flume Water Monitor stats                        | flume-water-prometheus-exporter                 | [github.com/zugdud/flume-water-prometheus-exporter](https://github.com/zugdud/flume-water-prometheus-exporter) |
+| 2  | Ubiquiti network gear stats                      | unpoller                                        | [github.com/unpoller/unpoller](https://github.com/unpoller/unpoller)            |
+| 3  | Pi-hole DNS stats                                | pihole-exporter                                 | [github.com/eko/pihole-exporter](https://github.com/eko/pihole-exporter)        |
+| 4  | Gaming PC sensors and system stats               | librehardwaremonitor-prometheus-exporter         | [github.com/zugdud/librehardwaremonitor-prometheus-exporter](https://github.com/zugdud/librehardwaremonitor-prometheus-exporter) |
 
 ## Services Overview
 
